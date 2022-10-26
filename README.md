@@ -23,7 +23,7 @@
 
 ## Live version
 
-[https://motorbike-booking.netlify.app/]
+[](https://motorbike-booking.netlify.app/)
 
 ## Getting Started
 
