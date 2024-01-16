@@ -6,17 +6,18 @@ import UseAuth from '../../../common/UseAuth';
 
 const initialState = {
   loading: false,
-  motor: [],
+  reserve: [],
   errors: [],
 };
 
-export const FetchMotorDetails = createAsyncThunk('motordetails', async (motorid, { rejectWithValue }) => {
-  const id = toast.loading('Loading data....');
+export const CreateReservation = createAsyncThunk('newreserve', async (newreserve, { rejectWithValue }) => {
+  const id = toast.loading('Loading....');
   try {
     const { config } = UseAuth();
-    const response = await axios.get(`https://pacific-cove-79167.herokuapp.com/api/v1/motorbikes/${motorid}`, config);
+    const response = await axios.post('https://pacific-cove-79167.herokuapp.com/api/v1/reservations',
+      newreserve, config);
     toast.update(id, {
-      render: 'Motor Displayed successfully',
+      render: 'Motor Reserved successfully',
       type: 'success',
       autoClose: 2000,
       isLoading: false,
@@ -24,7 +25,7 @@ export const FetchMotorDetails = createAsyncThunk('motordetails', async (motorid
     return response.data;
   } catch (error) {
     toast.update(id, {
-      render: 'Fail to load motor details',
+      render: 'Reserve Motor Failed',
       type: 'error',
       autoClose: 2000,
       isLoading: false,
@@ -33,26 +34,26 @@ export const FetchMotorDetails = createAsyncThunk('motordetails', async (motorid
   }
 });
 
-const motordetailsSlice = createSlice({
-  name: 'motordetails',
+const newreserveSlice = createSlice({
+  name: 'newreserve',
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(FetchMotorDetails.pending, (state) => {
+    builder.addCase(CreateReservation.pending, (state) => {
       state.loading = true;
-      state.motor = [];
+      state.reserve = [];
       state.errors = [];
     });
-    builder.addCase(FetchMotorDetails.fulfilled, (state, action) => {
+    builder.addCase(CreateReservation.fulfilled, (state, action) => {
       state.loading = false;
-      state.motor = action.payload;
+      state.reserve = action.payload;
       state.errors = [];
     });
-    builder.addCase(FetchMotorDetails.rejected, (state, action) => {
+    builder.addCase(CreateReservation.rejected, (state, action) => {
       state.loading = false;
-      state.motor = [];
+      state.reserve = [];
       state.errors = action.error;
     });
   },
 });
 
-export default motordetailsSlice.reducer;
+export default newreserveSlice.reducer;

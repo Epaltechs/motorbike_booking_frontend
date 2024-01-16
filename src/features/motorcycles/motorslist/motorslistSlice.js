@@ -24,13 +24,19 @@ const motorslistSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(FetchMotors.pending, (state) => {
-      state.loading = true; state.motors = []; state.errors = [];
+      state.loading = true;
+      state.motors = [];
+      state.errors = [];
     });
     builder.addCase(FetchMotors.fulfilled, (state, action) => {
-      state.loading = false; state.motors = action.payload; state.errors = [];
+      state.loading = false;
+      state.motors = action.payload;
+      state.errors = [];
     });
     builder.addCase(FetchMotors.rejected, (state, action) => {
-      state.loading = false; state.motors = []; state.errors = action.error;
+      state.loading = false;
+      state.motors = [];
+      state.errors = action.error;
     });
   },
 });

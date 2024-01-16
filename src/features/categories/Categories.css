@@ -48,7 +48,7 @@
 
 .categories-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 
@@ -72,6 +72,7 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
 .category-desc p {
